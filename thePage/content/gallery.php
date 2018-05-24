@@ -1,0 +1,1 @@
+<p>There is a place for gallery</p>
