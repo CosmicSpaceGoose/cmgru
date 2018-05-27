@@ -38,52 +38,58 @@ if (navigator.getUserMedia) {
 			});
 		} else {
 			console.log("getUserMedia not supported");
-		}
-	var canvas, ctx;
-	canvas = document.getElementById("myCanvas");
-	ctx = canvas.getContext('2d');
-
-	function snapshot() {
-		document.getElementById('myCanvas').style.display = "block";
-		document.getElementById('save').style.display = "block";
-		ctx.drawImage(video, 0,0, canvas.width, canvas.height);
-		ctx.drawImage(img, 0,0, 226, 226);
 	}
 
-	function discard() {
-		document.getElementById('myCanvas').style.display = "none";
-		document.getElementById('save').style.display = "none";
+var canvas, ctx;
+canvas = document.getElementById("myCanvas");
+ctx = canvas.getContext('2d');
+var xhrq = new XMLHttpRequest;
+var arr;
+xhrq.onreadystatechange = function(){
+	if (xhrq.readyState === 4 && xhrq.status === 200) {
+		arr = JSON.parse(xhrq.responseText);
 	}
-	
-	function draw_image() {
-		switch (document.getElementById("atata").value) {
-			case "1":
-				img.src = "img/doge.png";
-				break;
-			case "2":
-				img.src = "img/trololo.png";
-				break;
-			default:
-				img.removeAttribute("src");
-		}
-	}
-	
-	function upload() {
-		var dataURL = canvas.toDataURL("image/png");
-		document.getElementById('hidden_data').value = dataURL;
-		var fd = new FormData(document.forms["form1"]);
+};
+xhrq.open('POST', 'php/mysql_get_data.php', true);
+xhrq.setRequestHeader( "Content-Type", "application/json" );
+xhrq.send(JSON.stringify(["file_path", "images"]));
 
-		var xhr = new XMLHttpRequest();
-		xhr.open('POST', 'php/save.php', true);
+function snapshot() {
+	document.getElementById('myCanvas').style.display = "block";
+	document.getElementById('save').style.display = "block";
+	ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+	ctx.drawImage(img, 0,0, 226, 226);
+}
 
-		// xhr.upload.onprogress = function(e) {
-		// 	if (e.lengthComputable) {
-		// 		var percentComplete = (e.loaded / e.total) * 100;
-		// 		console.log(percentComplete + '% uploaded');
-		// 		alert('Succesfully uploaded');
-		// 	}
-		// };
+function discard() {
+	canvas.style.display = "none";
+	document.getElementById('save').style.display = "none";
+}
 
-		// xhr.onload = function() {};
-		xhr.send(fd);
-	};
+function draw_image() {
+	var num = document.getElementById('atata').value;
+	if (arr[parseInt(num) - 1] !== 'undefined')
+		img.src = arr[parseInt(num) - 1]['file_path'];
+	else
+		delete img.src;
+}
+
+function upload() {
+	var dataURL = canvas.toDataURL("image/png");
+	document.getElementById('hidden_data').value = dataURL;
+	var fd = new FormData(document.forms["form1"]);
+
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'php/save.php', true);
+
+	// xhr.upload.onprogress = function(e) {
+	// 	if (e.lengthComputable) {
+	// 		var percentComplete = (e.loaded / e.total) * 100;
+	// 		console.log(percentComplete + '% uploaded');
+	// 		alert('Succesfully uploaded');
+	// 	}
+	// };
+
+	// xhr.onload = function() {};
+	xhr.send(fd);
+};

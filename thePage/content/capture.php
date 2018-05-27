@@ -1,9 +1,16 @@
-<p><button onclick="snapshot();">Take Snapshot</button></p>
-<p><button onclick="discard();">Discard</button></p>
+<p><button class="btns" onclick="snapshot();">Take Snapshot</button></p>
+<p><button class="btns" onclick="discard();">Discard</button></p>
 <p><div><select id="atata" onchange="draw_image()">
 	<option value="0">None</option>
-	<option value="1">Doge</option>
-	<option value="2">Trololo</option>
+<?php
+	include "php/mysql_cheak.php";
+	$arr = db_query_select("id, name", "images", NULL);
+	if (isset($arr))
+	{
+		foreach ($arr as $value) {
+?>
+	<option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+<?php	}}	?>
 </select></div></p>
 <div>
 	<video id="stream" onclick="snapshot(this);" width=400 height=300 id="video" autoplay></video>
