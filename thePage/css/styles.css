@@ -3,7 +3,7 @@
 	border: 1px solid red;
 	width: 80%;
 	height: 100%;
-	margin: 10px auto auto auto;
+	margin: 10px auto 50px auto;
 }
 
 .container {
@@ -15,21 +15,40 @@
 
 /*======================== SIGNUP ======================*/
 #signup {
-	align-content: center;
-	text-align: center;
-	font-size: 20px;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%);
+	font-size: 13px;
 	font-family: Georgia;
+	padding-top: 5%;
 }
 
 #signup input {
-	margin: 20px 20px 20px 20px;
-	font-size: 20px;
+	margin: 10px 20px 0 20px;
+	font-size: 16px;
 	font-family: Georgia;
 	display: block;
 	border: none;
 }
 
-.error {	color: red;	}
+.error {
+	color: red;
+	margin: 0 0 0 20px;
+}
+
+#success {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 2;
+	background-color: #98FB98;
+	transform: translate(-50%, -50%);
+	font-size: 16px;
+	font-family: Georgia;
+	color: #1D2951;
+	text-align: center;
+	padding: 10px 10px 10px 10px;
+}
 
 /*======================== CAPTURE ======================*/
 #stream	{	position: absolute;	}
@@ -70,7 +89,8 @@ body {
 	width: 100%;
 	padding: 4px 0 4px 0;
 	background: #00AD83;
-	border-bottom: 1px solid #98FB98;/*#1D2951;*/
+	border-bottom: 1px solid #98FB98;
+	box-shadow: 0 0 0 1px yellow;
 }
 
 .link {
@@ -91,7 +111,7 @@ body {
 
 #footer {
 	width: 100%;
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	padding: 4px 0 4px 0;
 	background: #00AD83;
@@ -99,7 +119,9 @@ body {
 	color: #98FB98;
 	font-family: Georgia;
 	font-size: 12px;
-	border-top: 1px solid #98FB98;/*#1D2951;*/
+	border-top: 1px solid #98FB98;
+	box-shadow: 0 0 0 1px yellow;
+	overflow: auto;
 }
 
 .btns {
@@ -119,7 +141,7 @@ body {
 	color: Azure;
 }
 #back {
-	position: absolute;
+	position: fixed;
 	padding: 2px 2px 2px 2px;
 	left: 10px;
 	bottom: 25px;
@@ -181,7 +203,9 @@ body {
 	color: #1D2951;
 }
 
-#session:hover #login_form, #session:hover a {	display: block; }
+#session:hover #login_form, #session:hover a {
+	display: block;
+}
 
 ::placeholder {
 	color: lightgrey;

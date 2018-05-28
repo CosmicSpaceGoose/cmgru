@@ -3,7 +3,7 @@
 <p><div><select id="atata" onchange="draw_image()">
 	<option value="0">None</option>
 <?php
-	include "php/mysql_cheak.php";
+	include_once "php/mysql_cheak.php";
 	$arr = db_query_select("id, name", "images", NULL);
 	if (isset($arr))
 	{
