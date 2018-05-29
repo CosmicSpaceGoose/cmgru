@@ -1,33 +1,56 @@
 <?php
 
-function db_query_select($request, $querry, $part) {
-	$servername = 'localhost';
-	$username = 'root';
-	$password = 'qwertyuiop';
-	$link = mysqli_connect($servername, $username, $password, 'db_camagru');
-	if (mysqli_connect_errno() > 0) {
-		exit('Error: '.mysqli_connect_error()."\n");
+include_once "config/database.php";
+
+function db_query_select($fields, $table, $part) {
+	try {
+		$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, $DB_OPT);
+	} catch (PDOException $error) {
+		exit("Connection failed: ".$error->getMessage());
 	}
 	if ($part == true)
-		$sql = "SELECT $request FROM $querry WHERE $part";
+		$sql = "SELECT $fields FROM $table WHERE $part";
 	else
-		$sql = "SELECT $request FROM $querry";
-	$result = mysqli_query($link, $sql);
-	mysqli_close($link);
+		$sql = "SELECT $fields FROM $table";
+	$result = $pdo->query($sql)->fetchAll();
+	$pdo = NULL;
 	return ($result);
 }
 
-function db_query_insert($table, $fields, $values) {
-	$servername = 'localhost';
-	$username = 'root';
-	$password = 'qwertyuiop';
-	$link = mysqli_connect($servername, $username, $password, 'db_camagru');
-	if (mysqli_connect_errno() > 0) {
-		exit('Error: '.mysqli_connect_error()."\n");
+static function db_pdo_helper($fields, &$values, $inserts = array()) {
+	$prepare = '';
+	$values = array();
+	foreach ($fields as $name) {
+		if (isset($inserts[$name])) {
+			$prepare .= "`".str_replace("`","``",$name)."`". "=:$field, ";
+			$values[$name] = $inserts[$name];
+		}
 	}
-	$sql = "INSERT INTO $table ( $fields ) VALUES ( $values )";
-	$ret = mysqli_query($link, $sql);
-	mysqli_close($link);
-	return ($ret);
+	return substr($prepare, 0, -2); 
 }
+
+function db_query_insert($table, $fields, $inserts) {
+	try {
+		$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, $DB_OPT);
+	} catch (PDOException $error) {
+		exit("Connection failed: ".$error->getMessage());
+	}
+	$stmt = $pdo->prepare("INSERT INTO $table SET".db_pdo_helper($fields, $values, $inserts));
+	$stmt->execute($values);
+	$stmt = NULL;
+	$pdo = NULL;
+}
+
+function db_query_update($table, $fields, $inserts) {
+	try {
+		$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, $DB_OPT);
+	} catch (PDOException $error) {
+		exit("Connection failed: ".$error->getMessage());
+	}
+	$stmt = $pdo->prepare("UPDATE $table SET".db_pdo_helper($fields, $values, $inserts));
+	$stmt->execute($values);
+	$stmt = NULL;
+	$pdo = NULL;
+}
+
 ?>

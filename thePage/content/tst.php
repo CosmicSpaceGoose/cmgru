@@ -1,13 +1,20 @@
 <?php
-
-if (file_exists("php/mysql_cheak.php")) {
-	include "php/mysql_cheak.php";
-
-	$arr = db_query_select("*", "`users`", "`username` = \"".$uname."\"");
-	echo mysqli_num_rows($arr);
+function pdoSet($allowed, &$values, $source = array()) {
+  $set = '';
+  $values = array();
+  if (!$source) $source = &$_POST;
+  foreach ($allowed as $field) {
+    if (isset($source[$field])) {
+      $set.="`".str_replace("`","``",$field)."`". "=:$field, ";
+      $values[$field] = $source[$field];
+    }
+  }
+  return substr($set, 0, -2); 
 }
-else
-{
-	echo "file not exist??\n";
-}
+
+$allowed = array("name","surname","email");
+echo "SET\n";
+echo pdoSet($allowed, $values,  array('lol'=>"KEK",'surname'=>"BOBIKOFF",'email'=>"bobkin@mail.com"))."\n";
+echo "VALUES\n";
+print_r($values);
 ?>

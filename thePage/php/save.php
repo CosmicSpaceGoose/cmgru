@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include "mysql_cheak.php";
 
 $upload_dir = "../pictures/";

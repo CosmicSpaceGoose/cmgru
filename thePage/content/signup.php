@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	} else if ($_POST['psswd'] !== $_POST['cnfrm']) {
 		$psswdErr = "Passwords are not equal.";
 	} else {
-		$psswd = hash('whirlpool', $_POST['psswd']);
+		$psswd = hash('whirlpool', $name.$_POST['psswd']);
 	}
 
 	if ($nameErr == "" && $psswdErr == "" && $mailErr == "") {
