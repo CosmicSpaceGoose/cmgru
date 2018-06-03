@@ -1,3 +1,6 @@
+<?php
+	if ($_SESSION["loggued_on_user"] == true
+	&& $_SESSION["loggued_on_user"] !== "") {	?>
 <p><button class="btns" onclick="snapshot();">Take Snapshot</button></p>
 <p><button class="btns" onclick="discard();">Discard</button></p>
 <p><div><select id="atata" onchange="draw_image()">
@@ -22,3 +25,7 @@
 	<input name="hidden_data" id='hidden_data' type="hidden">
 </form>
 <script src="js/camera.js"></script>
+<?php
+} else {
+	echo "Sorry, but u aren't authorize to use this page.";
+}	?>

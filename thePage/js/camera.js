@@ -28,7 +28,7 @@ if (navigator.getUserMedia) {
 					height: { min: 720 }
 				}*/
 		},
-		function(localMediaStream) {
+		function ( localMediaStream ) {
 			video = document.querySelector('video');
 				video.srcObject = localMediaStream;
 				webcamStream = localMediaStream;
@@ -52,7 +52,7 @@ xhrq.onreadystatechange = function(){
 };
 xhrq.open('POST', 'php/mysql_get_data.php', true);
 xhrq.setRequestHeader( "Content-Type", "application/json" );
-xhrq.send(JSON.stringify(["file_path", "images"]));
+xhrq.send(JSON.stringify(["file_path", "images", null]));
 
 function snapshot() {
 	document.getElementById('myCanvas').style.display = "block";

@@ -1,21 +1,18 @@
 <?php
-session_start();
-
-include_once "php/mysql_cheak.php";
+include_once $_SERVER['DOCUMENT_ROOT']."php/mysql_cheak.php";
 $logErr = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$result = db_query_select("*", "`users`", "`email` = '".$_POST['mail']."'");
-	if ($data = mysqli_fetch_array($result, MYSQLI_ASSOC))
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['submit'] == 'login') {
+	$result = db_query_select("*", "`users`", "`email` = '".$_POST['login_mail']."'");
+	if (isset($result[0]))
 	{
-		if ($data['password'] == hash('whirlpool', $_POST['passwd']))
-			$_SESSION["loggued_on_user"] = $data["username"];
+		if ($result[0]['password'] == hash('whirlpool', $_POST['login_mail'].$_POST['login_pswd']))
+			$_SESSION["loggued_on_user"] = $result[0]['username'];
 		else
 			$logErr = "incorect password";
-		mysqli_free_result($data);
-	} else {
-		$logErr = "incorect e-mail";
 	}
+	else
+		$logErr = "incorect e-mail";
 	if ($logErr == "") {
 		header("Location: ".$_SERVER['REQUEST_URI']);
 		exit();

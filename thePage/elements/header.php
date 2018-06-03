@@ -1,4 +1,7 @@
-<?php include "php/check_login.php";?>
+<?php
+session_start();
+include "php/check_login.php";
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,8 +9,8 @@
 	<link rel="stylesheet" href="css/styles.css">
 	<link rel="shortcut icon" href="">
 </head>
-
-<body onload="init()">
+<script src="js/schnellereporter.js"></script>
+<body>
 <div id="header">
 	<a class="link" href="index.php?page=gallery">Gallery</a>
 </div>
@@ -21,17 +24,13 @@
 <?php	} else {	?>
 	<div class="drpdwn">Hello <b><i>Guest</i></b></div>
 	<div id="login_form"><form method="POST">
-		<input type="text" placeholder="E-mail" name="mail">
-		<input type="password" placeholder="Password" name="passwd">
+		<input type="text" placeholder="E-mail" name="login_mail">
+		<input type="password" placeholder="Password" name="login_pswd">
 		<span style="color:red;"><?php echo $logErr ?></span>
-		<button class="btns" type="submit">Login</button>
+		<button class="btns" type="submit" name="submit" value="login">Login</button>
 	</form></div>
-	<a href="index.php?page=signup">Sign Up</a>
-	<a href="index.php?page=resent">Forgot Password?</a>
+	<a href="index.php?page=auth">Sign Up</a>
+	<a href="index.php">Forgot Password?</a>
+	<div onclick="schnelleReporter('Some difusal text')">OK</div>
 <?php	}	?>
 </div>
-<script type="text/javascript">
-	function init() {
-
-	}
-</script>

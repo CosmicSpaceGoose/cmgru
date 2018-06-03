@@ -20,7 +20,7 @@ $pdo->query("USE $dbname");
 try {
 	$stmt = $pdo->query("CREATE TABLE IF NOT EXISTS users (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 		username VARCHAR(30) NOT NULL,
-		password VARCHAR(30) NOT NULL,
+		password VARCHAR(64) NOT NULL,
 		email VARCHAR(50) NOT NULL,
 		confirm BOOLEAN NOT NULL DEFAULT 0
 		)");
@@ -32,10 +32,10 @@ try {
 	$stmt = $pdo->query("CREATE TABLE IF NOT EXISTS pictures (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 		file_path VARCHAR(500) NOT NULL,
 		username VARCHAR(200) NOT NULL,
-		comments VARCHAR(10) NOT NULL,
-		likes INT(6) NOT NULL,
-		dislikes INT(6) NOT NULL,
-		date_create DATE NOT NULL
+		comments VARCHAR(10) DEFAULT NULL,
+		likes INT(6) NOT NULL DEFAULT 0,
+		dislikes INT(6) NOT NULL DEFAULT 0,
+		date_create TIMESTAMP(6) NOT NULL
 		)");
 } catch (PDOException $error) {
 	exit("Error creating table: ".$error->getMessage());

@@ -1,10 +1,8 @@
 <?php
-
-include_once "config/database.php";
-
+include_once $_SERVER['DOCUMENT_ROOT']."config/database.php";
 function db_query_select($fields, $table, $part) {
 	try {
-		$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, $DB_OPT);
+		$pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD'], $GLOBALS['DB_OPT']);
 	} catch (PDOException $error) {
 		exit("Connection failed: ".$error->getMessage());
 	}
@@ -17,23 +15,23 @@ function db_query_select($fields, $table, $part) {
 	return ($result);
 }
 
-static function db_pdo_helper($fields, &$values, $inserts = array()) {
+function db_pdo_helper($fields, &$values, $inserts = array()) {
 	$prepare = '';
 	$values = array();
 	foreach ($fields as $name) {
 		if (isset($inserts[$name])) {
-			$prepare .= "`".str_replace("`","``",$name)."`". "=:$field, ";
+			$prepare .= "`".str_replace("`","``",$name)."`". "=:$name, ";
 			$values[$name] = $inserts[$name];
 		}
 	}
-	return substr($prepare, 0, -2); 
+	return (substr($prepare, 0, -2)); 
 }
 
 function db_query_insert($table, $fields, $inserts) {
 	try {
-		$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, $DB_OPT);
+		$pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD'], $GLOBALS['DB_OPT']);
 	} catch (PDOException $error) {
-		exit("Connection failed: ".$error->getMessage());
+		exit("'Connect failed: ".$error->getMessage()."'");
 	}
 	$stmt = $pdo->prepare("INSERT INTO $table SET".db_pdo_helper($fields, $values, $inserts));
 	$stmt->execute($values);
@@ -43,7 +41,7 @@ function db_query_insert($table, $fields, $inserts) {
 
 function db_query_update($table, $fields, $inserts) {
 	try {
-		$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, $DB_OPT);
+		$pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD'], $GLOBALS['DB_OPT']);
 	} catch (PDOException $error) {
 		exit("Connection failed: ".$error->getMessage());
 	}
@@ -52,5 +50,4 @@ function db_query_update($table, $fields, $inserts) {
 	$stmt = NULL;
 	$pdo = NULL;
 }
-
 ?>
