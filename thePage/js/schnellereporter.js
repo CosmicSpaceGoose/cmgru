@@ -10,7 +10,7 @@
 //                                                                            //
 // ************************************************************************** //
 
-function schnelleReporter( string ) {
+function schnelleReporter( string, location ) {
 	var obj = document.getElementsByClassName( 'schnelleReport' );
 	if ( obj.length == 0 ) {
 		savan = document.createElement( 'div' );
@@ -20,10 +20,11 @@ function schnelleReporter( string ) {
 		var text = document.createTextNode( string );
 		obj.appendChild( text );
 		var btn = document.createElement( 'button' );
-		btn.appendChild( document.createTextNode( 'Okaj' ) );
+		btn.appendChild( document.createTextNode( 'Omg, okaj' ) );
 		btn.classList.add( 'btns' );
 		btn.onclick = function() {
 			document.body.removeChild( savan );
+			window.location.href = location;
 		};
 		obj.appendChild( btn );
 		savan.appendChild( obj );

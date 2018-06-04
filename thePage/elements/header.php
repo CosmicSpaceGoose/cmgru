@@ -7,7 +7,7 @@ include "php/check_login.php";
 <head>
 	<title>thePage</title>
 	<link rel="stylesheet" href="css/styles.css">
-	<link rel="shortcut icon" href="">
+	<link rel="shortcut icon" href="ico.png">
 </head>
 <script src="js/schnellereporter.js"></script>
 <body>
@@ -31,6 +31,6 @@ include "php/check_login.php";
 	</form></div>
 	<a href="index.php?page=auth">Sign Up</a>
 	<a href="index.php">Forgot Password?</a>
-	<div onclick="schnelleReporter('Some difusal text')">OK</div>
+	<div onclick="schnelleReporter('Some difusal text', 'index.php')">OK</div>
 <?php	}	?>
 </div>

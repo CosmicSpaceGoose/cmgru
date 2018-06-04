@@ -92,4 +92,5 @@ function upload() {
 
 	// xhr.onload = function() {};
 	xhr.send(fd);
+	schnelleReporter( 'Photo succesfully upload!', 'index.php?page=capture' );
 };

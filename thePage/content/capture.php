@@ -26,6 +26,8 @@
 </form>
 <script src="js/camera.js"></script>
 <?php
-} else {
-	echo "Sorry, but u aren't authorize to use this page.";
-}	?>
+} else { ?>
+<script type="text/javascript">
+	schnelleReporter( "Sorry, but You aren't authorized to use this page", 'index.php' );
+</script>
+<?php	}	?>

@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['submit'] == 'signup') {
 		$nameErr = "Username must contain at least 4 symbols.";
 	} else if (strlen(cook_str($_POST['sign_name'])) > 30) {
 		$nameErr = "Whoa, chose shortener username.";
-	} else if (mysqli_num_rows(db_query_select("*", "`users`", "`username` = '".cook_str($_POST['sign_name'])."'")) > 0) {
+	} else if (count(db_query_select("*", "`users`", "`username` = '".cook_str($_POST['sign_name'])."'")) > 0) {
 		$nameErr = "Username already in use.";
 	} else {
 		$name = cook_str($_POST['sign_name']);
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['submit'] == 'signup') {
 		$mailErr = "E-mail reqired";;
 	} else if (!filter_var($_POST['sign_mail'], FILTER_VALIDATE_EMAIL)) {
 		$mailErr = "Invalid e-mail adress.";
-	} else if (mysqli_num_rows(db_query_select("*", "`users`", "`email` = '".$_POST['sign_mail']."'")) > 0) {
+	} else if (count(db_query_select("*", "`users`", "`email` = '".$_POST['sign_mail']."'")) > 0) {
 		$mailErr = "E-mail already registered.";
 	} else {
 		$mail = $_POST['sign_mail'];
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['submit'] == 'signup') {
 		$psswdErr = "Password required.";
 	} else if (strlen($_POST['sign_pswd']) < 6)	{
 		$psswdErr = "Password must contain at least 6 symbols.";
-	} else if ($_POST['sign_pswd'] !== $_POST['cnfrm']) {
+	} else if ($_POST['sign_pswd'] !== $_POST['sign_cnfrm']) {
 		$psswdErr = "Passwords are not equal.";
 	} else {
 		$psswd = hash('whirlpool', $_POST['sign_mail'].$_POST['sign_pswd']);
@@ -54,11 +54,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['submit'] == 'signup') {
 } else if ($_SERVER["REQUEST_METHOD"] == "GET") {
 	$name = $psswd = $mail = "";
 	$nameErr = $psswdErr = $mailErr = "";
-	if (isset($_GET['status']) && $_GET['status'] == 'success') {
-?>
-	<div class="schnelleReport">We've sent a massege on your e-mail. You must confirm it by clickin' on the link in massege.</div>
-<?php	}}	?>
-
+	?>
+<script type="text/javascript">
+var url = new URL(window.location);
+if (url.searchParams.get( 'status' ) == 'success') {
+	schnelleReporter( "We've sent a massege on your e-mail. You must confirm it by clickin' on the link in massege.", 'index.php?page=auth' );
+}
+</script>
+<?php	}	?>
 <form id="signup" method="POST" action="">
 	<div><input type="text" placeholder="E-mail" name="sign_mail" value="<?php echo $_POST['mail'];?>">
 		<span class="error"><?php echo $mailErr;?></span></div>
