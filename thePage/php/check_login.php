@@ -1,6 +1,5 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."php/mysql_cheak.php";
-$logErr = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['submit'] == 'login') {
 	$result = db_query_select("*", "`users`", "`email` = '".$_POST['login_mail']."'");
@@ -14,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['submit'] == 'login') {
 	else
 		$logErr = "incorect e-mail";
 	if ($logErr == "") {
-		header("Location: ".$_SERVER['REQUEST_URI']);
+		header("Location: ".$_SERVER['REQUEST_URI'].'&status=login');
 		exit();
 	}
 }

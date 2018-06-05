@@ -24,7 +24,8 @@ function schnelleReporter( string, location ) {
 		btn.classList.add( 'btns' );
 		btn.onclick = function() {
 			document.body.removeChild( savan );
-			window.location.href = location;
+			if ( location !== null )
+				window.location.href = location;
 		};
 		obj.appendChild( btn );
 		savan.appendChild( obj );

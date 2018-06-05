@@ -55,10 +55,12 @@ xhrq.setRequestHeader( "Content-Type", "application/json" );
 xhrq.send(JSON.stringify(["file_path", "images", null]));
 
 function snapshot() {
-	document.getElementById('myCanvas').style.display = "block";
-	document.getElementById('save').style.display = "block";
-	ctx.drawImage(video, 0,0, canvas.width, canvas.height);
-	ctx.drawImage(img, 0,0, 226, 226);
+	if ( document.getElementById('atata').value > 0 ) {
+		document.getElementById('myCanvas').style.display = "block";
+		document.getElementById('save').style.display = "block";
+		ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+		ctx.drawImage(img, 0,0, 226, 226);
+	}
 }
 
 function discard() {

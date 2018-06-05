@@ -1,7 +1,4 @@
-<?php
-session_start();
-include "php/check_login.php";
-?>
+<?php	session_start();	?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,14 +20,8 @@ include "php/check_login.php";
 	<a href="php/logout.php">Logout</a>
 <?php	} else {	?>
 	<div class="drpdwn">Hello <b><i>Guest</i></b></div>
-	<div id="login_form"><form method="POST">
-		<input type="text" placeholder="E-mail" name="login_mail">
-		<input type="password" placeholder="Password" name="login_pswd">
-		<span style="color:red;"><?php echo $logErr ?></span>
-		<button class="btns" type="submit" name="submit" value="login">Login</button>
-	</form></div>
-	<a href="index.php?page=auth">Sign Up</a>
-	<a href="index.php">Forgot Password?</a>
-	<div onclick="schnelleReporter('Some difusal text', 'index.php')">OK</div>
+	<a href="index.php?page=auth&frm=signup">Sign Up</a>
+	<a href="index.php?page=auth&frm=login">Login</a>
+	<a href="index.php">forgot password?</a>
 <?php	}	?>
 </div>

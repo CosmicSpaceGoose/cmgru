@@ -3,18 +3,18 @@
 	&& $_SESSION["loggued_on_user"] !== "") {	?>
 <p><button class="btns" onclick="snapshot();">Take Snapshot</button></p>
 <p><button class="btns" onclick="discard();">Discard</button></p>
-<p><div><select id="atata" onchange="draw_image()">
+<div><select id="atata" onchange="draw_image()">
 	<option value="0">None</option>
 <?php
 	include_once "php/mysql_cheak.php";
-	$arr = db_query_select("id, name", "images", NULL);
+	$arr = db_query_select("imgId, name", "images", NULL);
 	if (isset($arr))
 	{
 		foreach ($arr as $value) {
 ?>
-	<option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+	<option value="<?php echo $value['imgId']; ?>"><?php echo $value['name']; ?></option>
 <?php	}}	?>
-</select></div></p>
+</select></div>
 <div>
 	<video id="stream" onclick="snapshot(this);" width=400 height=300 id="video" autoplay></video>
 	<canvas id="myCanvas" width="400" height="300"></canvas>
