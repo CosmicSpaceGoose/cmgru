@@ -56,10 +56,10 @@ $stmt = $pdo->query("SELECT * FROM `images`");
 if (!$stmt->fetch()) {
 	try {
 		$stmt = $pdo->prepare("INSERT INTO images (name, file_path)	VALUES (?, ?)");
-		$stmt->execute(['Doge', 'img/doge.png']);
-		$stmt->execute(['Grumpy Cat', 'img/grumpy_cat.png']);
-		$stmt->execute(['Stoned Fox', 'img/stoned_fox.png']);
-		$stmt->execute(['Trololo', 'img/trollface.png']);
+		$stmt->execute(['Doge', 'images/cont/doge.png']);
+		$stmt->execute(['Grumpy Cat', 'images/cont/grumpy_cat.png']);
+		$stmt->execute(['Stoned Fox', 'images/cont/stoned_fox.png']);
+		$stmt->execute(['Trololo', 'images/cont/trollface.png']);
 	} catch (PDOException $error) {
 		exit("Error inserting values: ".$error->getMessage());
 	}

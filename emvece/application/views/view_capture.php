@@ -6,7 +6,7 @@
 <form id="atata" onchange="draw_image(this)" action="">
 	<input type="radio" name="imgs" value="0">None<br>
 <?php
-	include_once "php/mysql_cheak.php";
+	include_once "application/php/mysql_cheak.php";
 	$arr = db_query_select("imgId, name", "images", NULL);
 	if (isset($arr))
 	{
@@ -21,7 +21,7 @@
 <form method="post" accept-charset="utf-8" name="form1">
 	<input name="hidden_data" id='hidden_data' type="hidden">
 </form>
-<script src="js/camera.js"></script>
+<script src="js/capture.js"></script>
 <?php
 } else { ?>
 <script type="text/javascript">

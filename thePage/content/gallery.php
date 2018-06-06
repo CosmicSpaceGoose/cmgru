@@ -23,21 +23,31 @@ xhrq.onreadystatechange = function(){
 		arr.forEach( function( elem ) {
 			var obj = document.createElement( 'div' );
 			obj.classList.add( 'container' );
-			var text = document.createTextNode( elem['pictId'] );
-			obj.appendChild( text );
-			img = document.createElement( "img" );
+			var img = document.createElement( "img" );
 			img.src = elem['file_path'];
 			obj.appendChild( img );
-			text = document.createTextNode( elem['username']+"\n" );
-			obj.appendChild( text );
+			var div = document.createElement( 'div' );
+			text = document.createTextNode( elem['username'] );
+			div.appendChild( text )
+			obj.appendChild( div );
+			div = document.createElement( 'div' );
+			text = document.createTextNode( elem['date_create'] );
+			div.appendChild( text )
+			obj.appendChild( div );
 			com.forEach( function( cmnt ) {
 				if ( cmnt['pictId'] == elem['pictId'] ) {
-					text = document.createTextNode( cmnt['comment']+"\n" );
-					obj.appendChild( text );
-					text = document.createTextNode( cmnt['posted']+"\n" );
-					obj.appendChild( text );
-					text = document.createTextNode( cmnt['username']+"\n" );
-					obj.appendChild( text );
+					div = document.createElement( 'div' );
+					text = document.createTextNode( cmnt['comment'] );
+					div.appendChild( text );
+					obj.appendChild( div );
+					div = document.createElement( 'div' );
+					text = document.createTextNode( cmnt['posted'] );
+					div.appendChild( text );
+					obj.appendChild( div );
+					div = document.createElement( 'div' );
+					text = document.createTextNode( cmnt['username'] );
+					div.appendChild( text );
+					obj.appendChild( div );
 				}
 			});
 			parent.appendChild( obj );
@@ -46,5 +56,5 @@ xhrq.onreadystatechange = function(){
 };
 xhrq.open( 'POST', 'php/mysql_get_data.php', true );
 xhrq.setRequestHeader( "Content-Type", "application/json" );
-xhrq.send( JSON.stringify( ["*", "pictures", null] ) );
+xhrq.send( JSON.stringify(["*", "pictures", null]) );
 </script>
