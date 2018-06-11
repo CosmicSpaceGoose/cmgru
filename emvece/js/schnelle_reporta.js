@@ -11,12 +11,12 @@
 // ************************************************************************** //
 
 function schnelleReporter( string, location ) {
-	var obj = document.getElementsByClassName( 'schnelleReport' );
+	var obj = document.getElementsByClassName( 'schnelleReporta' );
 	if ( obj.length == 0 ) {
 		savan = document.createElement( 'div' );
 		savan.classList.add( 'savan' );
 		obj = document.createElement( 'div' );
-		obj.classList.add( 'schnelleReport' );
+		obj.classList.add( 'schnelleReporta' );
 		var text = document.createTextNode( string );
 		obj.appendChild( text );
 		var btn = document.createElement( 'button' );

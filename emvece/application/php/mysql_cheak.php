@@ -1,10 +1,15 @@
 <?php
-include_once "config/database.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "config/database.php";
+$GLOBALS['DB_DSN'] = $DB_DSN;
+$GLOBALS['DB_USER'] = $DB_USER;
+$GLOBALS['DB_PASSWORD'] = $DB_PASSWORD;
+$GLOBALS['DB_OPT'] = $DB_OPT;
+
 function db_query_select($fields, $table, $part) {
 	try {
 		$pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD'], $GLOBALS['DB_OPT']);
 	} catch (PDOException $error) {
-		exit("Connection failed: ".$error->getMessage());
+		exit("Connection failed: " . $error->getMessage());
 	}
 	if ($part == true)
 		$sql = "SELECT $fields FROM $table WHERE $part";
@@ -31,7 +36,7 @@ function db_query_insert($table, $fields, $inserts) {
 	try {
 		$pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD'], $GLOBALS['DB_OPT']);
 	} catch (PDOException $error) {
-		exit("'Connect failed: ".$error->getMessage()."'");
+		exit("'Connect failed: " . $error->getMessage() . "'");
 	}
 	$stmt = $pdo->prepare("INSERT INTO $table SET".db_pdo_helper($fields, $values, $inserts));
 	$stmt->execute($values);
@@ -39,13 +44,16 @@ function db_query_insert($table, $fields, $inserts) {
 	$pdo = NULL;
 }
 
-function db_query_update($table, $fields, $inserts) {
+function db_query_update($table, $fields, $inserts, $condition) {
 	try {
 		$pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD'], $GLOBALS['DB_OPT']);
 	} catch (PDOException $error) {
 		exit("Connection failed: ".$error->getMessage());
 	}
-	$stmt = $pdo->prepare("UPDATE $table SET".db_pdo_helper($fields, $values, $inserts));
+	if (isset($condition))
+		$stmt = $pdo->prepare("UPDATE $table SET".db_pdo_helper($fields, $values, $inserts)." WHERE ".$condition);
+	else
+		$stmt = $pdo->prepare("UPDATE $table SET".db_pdo_helper($fields, $values, $inserts));
 	$stmt->execute($values);
 	$stmt = NULL;
 	$pdo = NULL;

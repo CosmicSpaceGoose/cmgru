@@ -5,8 +5,12 @@ class Route {
 		$controllerName = 'Landing';
 		$actionName = 'index';
 
-		$routes = explode('/', $_SERVER['REQUEST_URI']);
+		$pos = strpos($_SERVER['REQUEST_URI'], '?');
 		error_log($_SERVER['REQUEST_URI']);
+		if ($pos == true)
+			$routes = explode('/', substr($_SERVER['REQUEST_URI'], 0, $pos));
+		else
+			$routes = explode('/', $_SERVER['REQUEST_URI']);
 		if ( !empty($routes[1]) )
 			$controllerName = $routes[1];
 		if ( !empty($routes[2]) )
@@ -41,7 +45,7 @@ class Route {
 		$host = 'http://'.$_SERVER['HTTP_HOST'].'/';
 		header('HTTP/1.1 404 Not Found');
 		header('Status: 404 Not Found');
-		header('Location:'.$host.'404');
+		header('Location:'.$host.'landing/404');
 	}
 }
 
