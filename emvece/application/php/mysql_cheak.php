@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "config/database.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . 'config/database.php';
 $GLOBALS['DB_DSN'] = $DB_DSN;
 $GLOBALS['DB_USER'] = $DB_USER;
 $GLOBALS['DB_PASSWORD'] = $DB_PASSWORD;

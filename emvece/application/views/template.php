@@ -13,7 +13,7 @@
 </div>
 <div id="session">
 <?php
-	if (isset($_SESSION["loggued_on_user"])	&& $_SESSION["loggued_on_user"] !== "") {	?>
+	if ( isset($_SESSION["loggued_on_user"] ) && $_SESSION["loggued_on_user"] !== "") {	?>
 	<div class="drpdwn">Hello <span style="color: #1D2951; "><b><i><?php echo $_SESSION["loggued_on_user"]; ?></i></b></span></div>
 	<a href="/account">Account</a>
 	<a href="/auth/logout">Logout</a>
@@ -21,7 +21,7 @@
 	<div class="drpdwn">Hello <b><i>Guest</i></b></div>
 	<a href="/auth?frm=signup">Sign Up</a>
 	<a href="/auth?frm=login">Login</a>
-	<a href="index.php">forgot password?</a>
+	<a href="/auth?frm=reset">forgot password?</a>
 <?php	}	?>
 </div>
 <?php

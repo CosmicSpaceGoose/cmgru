@@ -1,5 +1,5 @@
 <?php
-if (( isset($_GET) && isset($_GET['frm']) && $_GET['frm'] == 'signup' ) || ( isset($data) && $data['frm'] == 'signup' )) { ?>
+if ( $_GET['frm'] == 'signup' || ( isset($data) && $data['frm'] == 'signup' )) { ?>
 <div id="form_holder">
 	<form class="formz" method="POST" action="/auth/signup">
 		<div><input type="text" placeholder="E-mail" name="email" value="<?php if (isset($_POST['email'])) { echo $_POST['email']; } ?>">
@@ -13,7 +13,7 @@ if (( isset($_GET) && isset($_GET['frm']) && $_GET['frm'] == 'signup' ) || ( iss
 		<button class="btns" type="submit" name="submit" value="signup">Sign Up</button>
 	</form>
 </div>
-<?php	} else if (( isset($_GET) && isset($_GET['frm']) && $_GET['frm'] == 'login' ) || (isset($data) && $data['frm'] == 'login' )) { ?>
+<?php	} else if ( $_GET['frm'] == 'login' || (isset($data) && $data['frm'] == 'login' )) { ?>
 	<div id="form_holder">
 	<form class="formz" method="POST" action="/auth/login">
 		<input type="text" placeholder="E-mail" name="email" value="<?php if (isset($_POST['email'])) { echo $_POST['email']; } ?>">
@@ -22,14 +22,14 @@ if (( isset($_GET) && isset($_GET['frm']) && $_GET['frm'] == 'signup' ) || ( iss
 		<button class="btns" type="submit" name="submit" value="login">Login</button>
 	</form>
 	</div>
-<?php	} else if (isset($_GET) && isset($_GET['status']) && $_GET['status'] == 'success') { ?>
-<script>
-	schnelleReporter("Your acount was created. Please activate it by clickin on the link in mail, that we send into your e-mail.", "/");
-</script>
-<?php	} else if (isset($_GET) && isset($_GET['status']) && $_GET['status'] == 'active') { ?>
-<script>
-	schnelleReporter("Your acount was succesfully activated. Now you can fully use all capabilities. Enjoy.", "/");
-</script>
+<?php	} else if ( $_GET['frm'] == 'reset' || (isset($data) && $data['frm'] == 'reset' )) { ?>
+	<div id="form_holder">
+	<form class="formz" method="POST" action="/auth/reset">
+		<input type="text" placeholder="E-mail" name="email" value="<?php if (isset($_POST['email'])) { echo $_POST['email']; } ?>">
+		<span class="error"><?php echo $mailErr ?></span>
+		<button class="btns" type="submit" name="submit" value="reset">Reset</button>
+	</form>
+	</div>
 <?php	} else {
 	header("Location: /404");
 }	?>

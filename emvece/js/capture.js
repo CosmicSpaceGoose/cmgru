@@ -17,30 +17,35 @@ navigator.getUserMedia = ( navigator.getUserMedia ||
 var video;
 var webcamStream;
 var img = new Image();
+var uploadImg = new Image();
 var num = -1;
 var x = 0;
 var y = 0;
+document.getElementById('desktop')
+	.addEventListener('change', upload_from_desktop, false);
 
 if (navigator.getUserMedia) {
 	navigator.getUserMedia (
-		{
-			audio: false,
-			video: {
-					width: { min: 640 },
-					height: { min: 480 }
-				}
+	{
+		audio: false,
+		video: {
+				width: { min: 640 },
+				height: { min: 480 }
+			}
+	},
+	function ( localMediaStream ) {
+		video = document.querySelector( 'video' );
+			video.srcObject = localMediaStream;
+			webcamStream = localMediaStream;
 		},
-		function ( localMediaStream ) {
-			video = document.querySelector( 'video' );
-				video.srcObject = localMediaStream;
-				webcamStream = localMediaStream;
-			},
-			function( err ) {
-				console.log( "The following error occured: " + err );
-			});
-		} else {
+		function( err ) {
+			video = false;
+			console.log( "The following error occured: " + err );
+		});
+} else {
+			video = false;
 			console.log( "getUserMedia not supported" );
-	}
+}
 
 var canvas, ctx;
 canvas = document.getElementById( "myCanvas" );
@@ -58,6 +63,8 @@ xhrq.send( JSON.stringify( [ "file_path", "images", null ]));
 
 function discard() {
 	ctx.clearRect( 0,0, canvas.width, canvas.height );
+	if ( uploadImg.src )
+		ctx.drawImage( uploadImg, 0,0, canvas.width, canvas.height );
 	ctx.drawImage( img, x,y, 226, 226 );
 	document.getElementById( 'save' ).style.display = "none";
 }
@@ -71,6 +78,8 @@ function draw_image( rads ) {
 	if (num - 1 in arr) {
 		ctx.clearRect( 0,0, canvas.width, canvas.height );
 		img.src = arr[num - 1]['file_path'];
+		if ( uploadImg.src )
+			ctx.drawImage( uploadImg, 0,0, canvas.width, canvas.height );
 		img.onload = function() {
 			ctx.drawImage( img, 0,0, 226, 226 );
 		}
@@ -83,12 +92,15 @@ function draw_image( rads ) {
 function snapshot() {
 	if ( num > -1 ) {
 		document.getElementById( 'save' ).style.display = "block";
-		ctx.drawImage( video, 0,0, canvas.width, canvas.height );
+		if ( !uploadImg.src )
+			ctx.drawImage( video, 0,0, canvas.width, canvas.height );
+		else
+			ctx.drawImage( uploadImg, 0,0, canvas.width, canvas.height );
 		ctx.drawImage( img, x,y, 226, 226 );
 	}
 }
 
-function upload() {
+function save_on_server() {
 	var dataURL = canvas.toDataURL( "image/png" );
 	document.getElementById( 'hidden_data' ).value = dataURL;
 	var fd = new FormData( document.forms["form1"] );
@@ -99,9 +111,27 @@ function upload() {
 	discard();
 };
 
+function upload_from_desktop( event ) {
+	var file = event.target.files[0];
+	if ( file ) {
+		var reader = new FileReader();
+		reader.onload = ( function( theFile ) {
+			var dataURL = reader.result;
+			uploadImg.src = dataURL;
+			uploadImg.onload = function() {
+				ctx.drawImage( uploadImg, 0,0, canvas.width, canvas.height );
+			}
+		});
+		reader.readAsDataURL( file );
+	} else {
+		uploadImg.removeAttribute( "src" );
+		discard();
+	}
+}
+
 function detect( elem ) {
-	x = event.clientX;
-	y = event.clientY;
+	x = event.clientX + 100;
+	y = event.clientY - 100;
 	x += (elem.width / 2);
 	do {
 		if ( !isNaN( elem.offsetLeft ))
@@ -110,6 +140,9 @@ function detect( elem ) {
 			y -= elem.offsetTop;
 	} while ( elem = elem.offsetParent );
 	ctx.clearRect( 0,0, canvas.width, canvas.height );
+	document.getElementById( 'save' ).style.display = "none";
+	if ( uploadImg.src )
+		ctx.drawImage( uploadImg, 0,0, canvas.width, canvas.height );
 	ctx.drawImage( img, x,y, 226, 226 );
 }
 

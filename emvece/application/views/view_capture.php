@@ -1,19 +1,10 @@
-<?php
-
-if ( isset( $_GET ) && isset( $_GET['status'] )) {
-	if ( $_GET['status'] == 'reject' ) { ?>
-<script>
-	schnelleReporter("Sorry, but you aren't authorized to use this page.", "/");
-</script>
-<?php	} else if ( $_GET['status'] == 'mail' ) { ?>
-<script>
-	schnelleReporter("Sorry, but you aren't verificate your email, please check mail box.", "/");
-</script>
-<?php	}} else {	?>
-<p><button class="btns" onclick="snapshot();">Take Snapshot</button></p>
-<p><button class="btns" onclick="discard();">Discard</button></p>
+<div id="captCont">
+<div id="right"><input class="btns" onclick="snapshot();" type="button" value="Take Snapshot">
+<input class="btns" onclick="discard();" type="button" value="Discard">
+<input id="desktop" class="btns" type="file">
+</div>
 <form id="atata" onchange="draw_image(this)" action="">
-	<input type="radio" name="imgs" value="0">None<br>
+	<input type="radio" name="imgs" value="0" checked="checked">None<br>
 <?php
 	if ( isset( $data ))
 	{
@@ -23,10 +14,10 @@ if ( isset( $_GET ) && isset( $_GET['status'] )) {
 <?php	}}	?>
 </form>	<video id="stream" onclick="snapshot();" width="640" height="480" id="video" autoplay></video>
 	<canvas id="myCanvas" width="640" height="480" onmousedown="detect(this)"></canvas>
-</div>
-<input id="save" type="button" onclick="upload()" value="Upload">
+<input id="save" type="button" onclick="save_on_server()" value="Save">
 <form method="post" accept-charset="utf-8" name="form1">
 	<input name="hidden_data" id='hidden_data' type="hidden">
 </form>
+</div>
 <script src="/js/capture.js"></script>
-<?php	}	?>
+</div>
