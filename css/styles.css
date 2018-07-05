@@ -1,0 +1,479 @@
+/*======================== ACCOUNT ======================*/
+#acc {
+	position: absolute;
+	left: 50%;
+	top: 50px;
+	transform: translate(-50%);
+}
+
+#acc .schnelleReporta {
+	margin: 250px 0 0 0;
+	width: 400px;
+}
+
+#acc form {
+	position: relative;
+	font-size: 13px;
+	font-family: Georgia;
+	padding-top: 5%;
+}
+
+#acc form input {
+	margin: 10px 20px 0 20px;
+	font-size: 16px;
+	font-family: Georgia;
+	display: block;
+	border: none;
+}
+
+#switch {
+	position: relative;
+	left: 50%;
+	transform: translate(-50%);
+	display: inline-block;
+	width: 48px;
+	height: 28px;
+	margin: 10px 0 0 0;
+}
+
+#teeeext {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%);
+	font-size: 10px;
+}
+
+.slider {	padding: 6px 0 0 4px; }
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #00AD83;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 20px;
+	width: 20px;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+}
+
+#switch input:checked + .slider { background-color: #98FB98;}
+#switch input:checked + .slider:before { transform: translateX(20px);}
+.slider.round			{	border-radius: 6px;}
+.slider.round:before	{	border-radius: 4px;}
+
+/*======================== GALLERY ======================*/
+#gallery {
+	position: absolute;
+	padding: 0 0 80px 0;
+	left: 50%;
+	top: 70px;
+	transform: translate(-50%);
+	width: 1230px;
+}
+
+.ultracontainer {
+	position: relative;
+	display: inline-block;
+	width: 400px;
+	vertical-align: top;
+	font-family: Georgia;
+	margin: 5px 5px 5px 5px;
+	padding: 0 0 10px 0;
+	background-color: #98FB98;
+	border-radius: 5px;
+	color: #1D2951;
+}
+.ultracontainer img {	height: 300px;	}
+.ultracontainer div {	margin: 5px 10px 0 10px;	}
+
+.container {
+	background-color: #00AD83;
+	position: absolute;
+	right: 5px;
+	top: 295px;
+	text-align: center;
+	color: #98FB98;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	padding: 0 0 5px 0;
+}
+.like {
+	font-size: 20px;
+	height: 32px;
+}
+.dislike {
+	font-size: 20px;
+	height: 32px;
+}
+.comment {
+	font-size: 30px;
+	width: 40px;
+	height: 40px;
+}
+.like, .dislike, .comment {		display: inline;	}
+.like:hover, .dislike:hover, .comment:hover {
+	color: #1D2951;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.compost {
+	font-size: 12px;
+	font-family: Verdana;
+	border-top: 1px solid yellow;
+}
+.compost_elem {		color: #00AD83;	}
+.compost_elem i {
+	word-break: break-word;	
+	color: #1D2951;
+}
+
+#pagination {
+	position: fixed;
+	left: 50%;
+	bottom: 50px;
+	transform: translate(-50%);
+}
+#pagination .btns {
+	display: inline;
+	font-size: 26px;
+}
+
+#page_num {
+	display: inline;
+	font-family: Georgia;
+	font-size: 26px;
+	color: #1D2951;	
+}
+
+#jump {
+	border: none;
+	text-align: center;
+	width: 50px;
+	display: none;
+}
+#jump::placeholder {	color: #1D2951;	}
+#jump:hover {background-color: rgba(0,0,0,0);}
+#jump:focus {
+	background-color: #1D2951;
+	color: Azure;
+}
+
+/*======================== SIGNUP ======================*/
+#form_holder {
+	position: absolute;
+	left: 50%;
+	top: 50px;
+	transform: translate(-50%);
+}
+
+.formz {
+	position: relative;
+	font-size: 13px;
+	font-family: Georgia;
+	padding-top: 5%;
+}
+
+.formz input {
+	margin: 10px 20px 0 20px;
+	font-size: 16px;
+	font-family: Georgia;
+	display: block;
+	border: none;
+}
+
+.error {
+	color: red;
+	margin: 0 0 0 20px;
+}
+
+/*======================== CAPTURE ======================*/
+#stream	{
+	top: 50px;
+	position: absolute;
+	margin: 100px 0 0 0;
+	left: 50%;
+	transform: translate(-50%);
+}
+#topCanva {		z-index: 2;	}
+#downCanva {	z-index: 1;	}
+
+#topCanva, #downCanva {	
+	top: 50px;
+	position: absolute;
+	margin: 100px 0 0 0;
+	left: 50%;
+	transform: translate(-50%);
+}
+
+#captCont {
+	top: 50px;
+	position: fixed;
+	right: 45%;
+	width: 400px;
+	margin: 20px 0 0 0;
+}
+#captCont .btns {
+	display: block;
+	margin: 0 0 0 0 ;
+}
+#save {
+	top: 94px;
+	position: relative;
+	left: 260px;
+	display: none;
+	padding: 2px 2px 2px 2px;
+	border-radius: 4px;
+	font-family: Georgia;
+	font-size: 26px;
+	color: #1D2951;
+	border: none;
+	background-color: transparent;
+}
+#save:hover {
+	background-color: #1D2951;
+	color: Azure;
+	cursor: pointer;
+}
+
+#left {	position: absolute;	}
+
+#right {
+	position: absolute;
+	align-items: left;
+	left: 50%;
+}
+
+#thumb {
+	top: 20px;
+	position: absolute;
+	left: 70%;
+	padding: 50px 0 50px 0;
+	height: auto;
+}
+#thumb div {
+	font-family: Verdana;
+	font-size: 14px;
+	color: #1D2951;
+	text-align: center;
+}
+.preview {
+	display: block;
+	margin: 5px 0 5px 0;
+	width: 200px;
+	height: 200px;
+}
+.preview img {
+	width: 200px;
+	height: 150px;
+}
+.eraser {
+	position: absolute;
+	display: none;
+	width: 200px;
+	height: 150px;
+	background-color: rgba(255, 255, 255, 0.7);
+}
+.preview:hover > .eraser {
+	display: block;
+}
+/*======================== GLOBAL ======================*/
+body {
+	margin: 0 0 0 0;
+	background-color: Azure;
+}
+
+#go {
+	position: absolute;
+	padding: 7px 7px 7px 7px;
+	top: 50%;
+	left: 50%;
+	text-decoration: none;
+	transform: translate(-50%, -50%);
+	color: #1D2951;
+	font-size: 50px;
+	border-radius: 8px;
+	text-align: center;
+}
+
+#go:hover {
+	background-color: #1D2951;
+	color: #98FB98;
+}
+
+#header {
+	position: fixed;
+	width: 100%;
+	padding: 4px 0 4px 0;
+	background: #00AD83;
+	border-bottom: 1px solid #98FB98;
+	box-shadow: 0 0 0 1px yellow;
+	z-index: 1;
+}
+
+.link {
+	padding: 2px 2px 2px 2px;
+	margin: 2px 6px 2px 6px;
+	border-radius: 4px;
+	font-family: Georgia;
+	font-size: 20px;
+	text-align: center;
+	text-decoration: none;
+	color: #1D2951;
+}
+
+.link:hover {
+	background-color: #1D2951;
+	color: Azure;
+}
+
+#footer {
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	padding: 4px 0 4px 0;
+	background: #00AD83;
+	text-align: right;
+	color: #98FB98;
+	font-family: Georgia;
+	font-size: 12px;
+	border-top: 1px solid #98FB98;
+	box-shadow: 0 0 0 1px yellow;
+	overflow: auto;
+}
+
+.btns {
+	display: block;
+	padding: 2px 2px 2px 2px;
+	margin: auto auto auto auto;
+	border-radius: 4px;
+	font-family: Georgia;
+	font-size: 16px;
+	color: #1D2951;
+	border: none;
+	background-color: transparent;
+}
+
+.btns:hover {
+	background-color: #1D2951;
+	color: Azure;
+	cursor: pointer;
+}
+#back {
+	position: fixed;
+	padding: 2px 2px 2px 2px;
+	font-family: Georgia;
+	font-size: 26px;
+	text-align: center;
+	text-decoration: none;
+	color: #1D2951;
+	z-index: 9;
+}
+
+#back:hover {
+	background-color: #1D2951;
+	color: Azure;	
+}
+
+.drpdwn {
+	padding: 10px 20px 10px 20px;
+	font-family: Georgia;
+	font-size: 15px;
+	color: #00AD83;
+}
+
+#session {
+	position: fixed;
+	padding: 4px 0 4px 0;
+	width: 200px;
+	top: 0;
+	right: 40px;
+	background-color: #98FB98;
+	text-align: center;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	z-index: 2;
+}
+#session a {
+	text-decoration: none;
+	display: none;
+	font-size: 13px;
+	color: #00AD83;
+}
+#session a:hover {	color: #1D2951;	}
+#session:hover #login_form, #session:hover a {	display: block;	}
+
+::placeholder {
+	color: lightgrey;
+    opacity: 1;
+}
+
+button:focus {outline:0;}
+input:focus {outline:0;}
+
+.schnelleReporta {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 11;
+	background-color: #98FB98;
+	transform: translate(-50%, -50%);
+	font-size: 16px;
+	font-family: Georgia;
+	color: #1D2951;
+	text-align: center;
+	padding: 10px 10px 10px 10px;
+}
+.savan {
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	display: inline;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(230,255,255,0.7);
+}
+
+#trap {
+	z-index: -1;
+	background-color: transparent;
+}
+
+@media only screen and (max-width: 400px) {
+	.link, #back {
+		font-size: 15px;
+		border-radius: 2px;
+	}
+
+	#header {padding: 5px 0 5px 0}
+	#session {padding: 5px 0 5px 0}
+	#footer {padding: 5px 0 5px 0}
+}
+
+@media only screen and (min-width: 800px) {
+	.link, #back {
+		font-size: 25px;
+		border-radius: 6px;
+	}
+	#back {
+		left: 10px;
+		bottom: 45px;
+	}
+	#header {padding: 10px 0 10px 0}
+	#session {padding: 10px 0 10px 0}
+	#footer {padding: 10px 0 10px 0}
+}
+/*
+Azure
+#1D2951 - Space Cadet
+#98FB98 - Mint Green
+#00AD83 - Green Pantone
+*/
